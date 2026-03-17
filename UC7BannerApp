@@ -1,0 +1,80 @@
+import java.util.*;
+
+public class OOPSBannerApp {
+
+    // Static Inner Class
+    static class CharacterPattern {
+        private char character;
+        private String[] pattern;
+
+        // Constructor
+        public CharacterPattern(char character, String[] pattern) {
+            this.character = character;
+            this.pattern = pattern;
+        }
+
+        // Getter
+        public char getCharacter() {
+            return character;
+        }
+
+        public String[] getPattern() {
+            return pattern;
+        }
+    }
+
+    // Map to store patterns
+    static Map<Character, CharacterPattern> patternMap = new HashMap<>();
+
+    // Initialize patterns
+    static {
+        patternMap.put('O', new CharacterPattern('O', new String[]{
+                " *** ",
+                "*   *",
+                "*   *",
+                "*   *",
+                " *** "
+        }));
+
+        patternMap.put('P', new CharacterPattern('P', new String[]{
+                "**** ",
+                "*   *",
+                "**** ",
+                "*    ",
+                "*    "
+        }));
+
+        patternMap.put('S', new CharacterPattern('S', new String[]{
+                " ****",
+                "*    ",
+                " *** ",
+                "    *",
+                "**** "
+        }));
+    }
+
+    // Display Banner
+    public static void printBanner(String text) {
+        StringBuilder[] output = new StringBuilder[5];
+
+        for (int i = 0; i < 5; i++) {
+            output[i] = new StringBuilder();
+        }
+
+        for (char ch : text.toCharArray()) {
+            CharacterPattern cp = patternMap.get(ch);
+
+            for (int i = 0; i < 5; i++) {
+                output[i].append(cp.getPattern()[i]).append("  ");
+            }
+        }
+
+        for (StringBuilder line : output) {
+            System.out.println(line);
+        }
+    }
+
+    public static void main(String[] args) {
+        printBanner("OOPS");
+    }
+}
